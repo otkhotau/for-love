@@ -1,0 +1,232 @@
+:root {
+    --primary-color: #ff4d6d;
+    --secondary-color: #ff8fa3;
+    --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-color: #590d22;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg-gradient);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Background Hearts Animation */
+.background-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.5rem;
+    animation: floatUp linear infinite;
+    bottom: -50px;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Card Styles */
+.container {
+    z-index: 10;
+    perspective: 1000px;
+    width: 90%;
+    max-width: 450px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+.card.hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Typography */
+.title {
+    font-family: 'Dancing Script', cursive;
+    color: var(--primary-color);
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.subtitle {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.message {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin: 1.5rem 0;
+    line-height: 1.6;
+}
+
+.small-text {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* Heart Pulse Animation */
+.header-image {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.heart-pulse {
+    font-size: 5rem;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    min-height: 120px;
+    /* Space for moving button */
+}
+
+.btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-yes {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-yes:hover {
+    background: #ff0033;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+}
+
+.btn-no {
+    background: white;
+    color: var(--text-color);
+    border: 2px solid #eee;
+}
+
+/* Button behavior adjustments for JS interaction */
+.btn-no.absolute-pos {
+    position: absolute;
+    transition: all 0.2s ease-out;
+    /* Faster transition for movement */
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+    .buttons {
+        flex-direction: row;
+        justify-content: center;
+        min-height: auto;
+    }
+
+    .btn {
+        min-width: 140px;
+    }
+}
+
+/* 3D Text Effect */
+.name-3d {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #ff4d6d;
+    text-transform: uppercase;
+    transform: perspective(500px) rotateX(10deg) rotateY(-5deg);
+    text-shadow:
+        1px 1px 0 #b3002d,
+        2px 2px 0 #b3002d,
+        3px 3px 0 #b3002d,
+        4px 4px 0 #b3002d,
+        5px 5px 0 #b3002d,
+        6px 6px 0 #b3002d,
+        0 15px 30px rgba(0, 0, 0, 0.2);
+    margin: 1.5rem 0;
+    display: inline-block;
+    animation: float3D 3s ease-in-out infinite alternate;
+}
+
+@keyframes float3D {
+    0% {
+        transform: perspective(500px) rotateX(10deg) rotateY(-5deg) translateY(0);
+    }
+
+    100% {
+        transform: perspective(500px) rotateX(10deg) rotateY(5deg) translateY(-10px);
+    }
+}
